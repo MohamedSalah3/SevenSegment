@@ -1,11 +1,18 @@
-7segment.d 7segment.o: .././7segment.c .././sevenSeg.h .././gpio.h \
- .././std_types.h .././sevenSegConfig.h .././softwareDelay.h
+7segment.d 7segment.o: .././7segment.c .././Interrupts.h .././registers.h \
+ .././std_types.h .././timers.h .././gpio.h .././sevenSeg.h \
+ .././sevenSegConfig.h .././softwareDelay.h
 
-.././sevenSeg.h:
+.././Interrupts.h:
+
+.././registers.h:
+
+.././std_types.h:
+
+.././timers.h:
 
 .././gpio.h:
 
-.././std_types.h:
+.././sevenSeg.h:
 
 .././sevenSegConfig.h:
 

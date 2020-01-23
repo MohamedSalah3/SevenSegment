@@ -37,8 +37,10 @@ SUBDIRS :=
 C_SRCS +=  \
 ../7segment.c \
 ../gpio.c \
+../Interrupts.c \
 ../sevenSegment.c \
-../softwareDelay.c
+../softwareDelay.c \
+../timer.c
 
 
 PREPROCESSING_SRCS += 
@@ -50,29 +52,37 @@ ASM_SRCS +=
 OBJS +=  \
 7segment.o \
 gpio.o \
+Interrupts.o \
 sevenSegment.o \
-softwareDelay.o
+softwareDelay.o \
+timer.o
 
 
 OBJS_AS_ARGS +=  \
 7segment.o \
 gpio.o \
+Interrupts.o \
 sevenSegment.o \
-softwareDelay.o
+softwareDelay.o \
+timer.o
 
 
 C_DEPS +=  \
 7segment.d \
 gpio.d \
+Interrupts.d \
 sevenSegment.d \
-softwareDelay.d
+softwareDelay.d \
+timer.d
 
 
 C_DEPS_AS_ARGS +=  \
 7segment.d \
 gpio.d \
+Interrupts.d \
 sevenSegment.d \
-softwareDelay.d
+softwareDelay.d \
+timer.d
 
 
 OUTPUT_FILE_PATH +=7segment.elf
@@ -84,6 +94,10 @@ ADDITIONAL_DEPENDENCIES:=
 OUTPUT_FILE_DEP:= ./makedep.mk
 
 # AVR32/GNU C Compiler
+
+
+
+
 
 
 

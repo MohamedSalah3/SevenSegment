@@ -6,7 +6,11 @@
 
 gpio.c
 
+Interrupts.c
+
 sevenSegment.c
 
 softwareDelay.c
+
+timer.c
 
