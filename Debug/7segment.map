@@ -23,8 +23,11 @@ Linker script and memory map
 LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr5/crtm32a.o
 LOAD 7segment.o
 LOAD gpio.o
+LOAD Interrupts.o
+LOAD led.o
 LOAD sevenSegment.o
 LOAD softwareDelay.o
+LOAD timer.o
 START GROUP
 LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr5\libm.a
 END GROUP
@@ -122,7 +125,7 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
 .rela.plt
  *(.rela.plt)
 
-.text           0x00000000      0x3a2
+.text           0x00000000      0x6da
  *(.vectors)
  .vectors       0x00000000       0x54 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr5/crtm32a.o
                 0x00000000                __vector_default
@@ -183,7 +186,6 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
                 0x0000008e                __bad_interrupt
                 0x0000008e                __vector_6
                 0x0000008e                __vector_3
-                0x0000008e                __vector_11
                 0x0000008e                __vector_13
                 0x0000008e                __vector_17
                 0x0000008e                __vector_19
@@ -199,37 +201,63 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
                 0x0000008e                __vector_16
                 0x0000008e                __vector_18
                 0x0000008e                __vector_20
- .text          0x00000092       0x6c 7segment.o
+ .text          0x00000092       0xc8 7segment.o
                 0x00000092                main
- .text          0x000000fe      0x1f6 gpio.o
-                0x000000fe                gpioPortDirection
-                0x00000120                gpioPortWrite
-                0x00000142                gpioPortToggle
-                0x00000174                gpioPortRead
-                0x00000198                gpioPinDirection
-                0x00000216                gpioPinWrite
-                0x0000028c                gpioPinToggle
-                0x000002be                gpioPinRead
- .text          0x000002f4       0x7c sevenSegment.o
-                0x000002f4                sevenSegInit
-                0x00000312                sevenSegEnable
-                0x00000334                sevenSegDisable
-                0x00000356                sevenSegWrite
- .text          0x00000370       0x2e softwareDelay.o
-                0x00000370                softwareDelayMs
- .text          0x0000039e        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
- .text          0x0000039e        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
- .text          0x0000039e        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
-                0x0000039e                . = ALIGN (0x2)
+                0x00000110                __vector_11
+ .text          0x0000015a      0x1f8 gpio.o
+                0x0000015a                gpioPortDirection
+                0x0000017c                gpioPortWrite
+                0x0000019e                gpioPortToggle
+                0x000001d0                gpioPortRead
+                0x000001f6                gpioPinDirection
+                0x00000274                gpioPinWrite
+                0x000002ea                gpioPinToggle
+                0x0000031c                gpioPinRead
+ .text          0x00000352       0x5a Interrupts.o
+                0x00000352                G_interrupt_Enable
+                0x0000035a                G_interrupt_Disable
+ .text          0x000003ac      0x100 led.o
+                0x000003ac                Led_Init
+                0x000003ee                Led_On
+                0x00000430                Led_Off
+                0x00000472                Led_Toggle
+ .text          0x000004ac       0x7c sevenSegment.o
+                0x000004ac                sevenSegInit
+                0x000004ca                sevenSegEnable
+                0x000004ec                sevenSegDisable
+                0x0000050e                sevenSegWrite
+ .text          0x00000528       0x2e softwareDelay.o
+                0x00000528                softwareDelayMs
+ .text          0x00000556      0x180 timer.o
+                0x00000556                timer0Set
+                0x0000055a                timer0Read
+                0x0000055e                timer0Start
+                0x00000570                timer0Stop
+                0x00000578                timer0Init
+                0x000005cc                timer0DelayMs
+                0x0000061a                timer0DelayUs
+                0x00000694                timer0SwPWM
+                0x000006c6                timer1Init
+                0x000006c8                timer1Set
+                0x000006ca                timer1Read
+                0x000006cc                timer1Start
+                0x000006ce                timer1Stop
+                0x000006d0                timer1DelayMs
+                0x000006d2                timer1DelayUs
+                0x000006d4                timer1SwPWM
+ .text          0x000006d6        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+ .text          0x000006d6        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
+ .text          0x000006d6        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
+                0x000006d6                . = ALIGN (0x2)
  *(.text.*)
- .text.libgcc   0x0000039e        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
- .text.libgcc   0x0000039e        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
- .text.libgcc   0x0000039e        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
-                0x0000039e                . = ALIGN (0x2)
+ .text.libgcc   0x000006d6        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+ .text.libgcc   0x000006d6        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
+ .text.libgcc   0x000006d6        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
+                0x000006d6                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x0000039e        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
-                0x0000039e                _exit
-                0x0000039e                exit
+ .fini9         0x000006d6        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+                0x000006d6                _exit
+                0x000006d6                exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -248,18 +276,21 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x0000039e        0x4 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+ .fini0         0x000006d6        0x4 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
  *(.fini0)
-                0x000003a2                _etext = .
+                0x000006da                _etext = .
 
-.data           0x00800060        0x0 load address 0x000003a2
+.data           0x00800060        0x0 load address 0x000006da
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x00800060        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr5/crtm32a.o
  .data          0x00800060        0x0 7segment.o
  .data          0x00800060        0x0 gpio.o
+ .data          0x00800060        0x0 Interrupts.o
+ .data          0x00800060        0x0 led.o
  .data          0x00800060        0x0 sevenSegment.o
  .data          0x00800060        0x0 softwareDelay.o
+ .data          0x00800060        0x0 timer.o
  .data          0x00800060        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
  .data          0x00800060        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
  .data          0x00800060        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
@@ -271,29 +302,34 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
                 0x00800060                _edata = .
                 0x00800060                PROVIDE (__data_end, .)
 
-.bss            0x00800060        0x0
+.bss            0x00800060        0x5
                 0x00800060                PROVIDE (__bss_start, .)
  *(.bss)
  .bss           0x00800060        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/../../../../avr/lib/avr5/crtm32a.o
- .bss           0x00800060        0x0 7segment.o
- .bss           0x00800060        0x0 gpio.o
- .bss           0x00800060        0x0 sevenSegment.o
- .bss           0x00800060        0x0 softwareDelay.o
- .bss           0x00800060        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
- .bss           0x00800060        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
- .bss           0x00800060        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
+ .bss           0x00800060        0x5 7segment.o
+                0x00800060                Prescaler_Value
+                0x00800061                u32_ovf_counter
+ .bss           0x00800065        0x0 gpio.o
+ .bss           0x00800065        0x0 Interrupts.o
+ .bss           0x00800065        0x0 led.o
+ .bss           0x00800065        0x0 sevenSegment.o
+ .bss           0x00800065        0x0 softwareDelay.o
+ .bss           0x00800065        0x0 timer.o
+ .bss           0x00800065        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+ .bss           0x00800065        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
+ .bss           0x00800065        0x0 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
  *(.bss*)
  *(COMMON)
-                0x00800060                PROVIDE (__bss_end, .)
-                0x000003a2                __data_load_start = LOADADDR (.data)
-                0x000003a2                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00800065                PROVIDE (__bss_end, .)
+                0x000006da                __data_load_start = LOADADDR (.data)
+                0x000006da                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00800060        0x0
-                0x00800060                PROVIDE (__noinit_start, .)
+.noinit         0x00800065        0x0
+                0x00800065                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00800060                PROVIDE (__noinit_end, .)
-                0x00800060                _end = .
-                0x00800060                PROVIDE (__heap_start, .)
+                0x00800065                PROVIDE (__noinit_end, .)
+                0x00800065                _end = .
+                0x00800065                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
  *(.eeprom*)
@@ -346,81 +382,108 @@ LOAD c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1
 .debug_sfnames
  *(.debug_sfnames)
 
-.debug_aranges  0x00000000       0xe0
+.debug_aranges  0x00000000      0x140
  *(.debug_aranges)
  .debug_aranges
                 0x00000000       0x20 7segment.o
  .debug_aranges
                 0x00000020       0x20 gpio.o
  .debug_aranges
-                0x00000040       0x20 sevenSegment.o
+                0x00000040       0x20 Interrupts.o
  .debug_aranges
-                0x00000060       0x20 softwareDelay.o
+                0x00000060       0x20 led.o
  .debug_aranges
-                0x00000080       0x20 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+                0x00000080       0x20 sevenSegment.o
  .debug_aranges
-                0x000000a0       0x20 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
+                0x000000a0       0x20 softwareDelay.o
  .debug_aranges
-                0x000000c0       0x20 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
+                0x000000c0       0x20 timer.o
+ .debug_aranges
+                0x000000e0       0x20 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+ .debug_aranges
+                0x00000100       0x20 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
+ .debug_aranges
+                0x00000120       0x20 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
 
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000      0x7e1
+.debug_info     0x00000000     0x10b8
  *(.debug_info)
- .debug_info    0x00000000       0xd8 7segment.o
- .debug_info    0x000000d8      0x25a gpio.o
- .debug_info    0x00000332      0x17b sevenSegment.o
- .debug_info    0x000004ad       0x9d softwareDelay.o
- .debug_info    0x0000054a       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
- .debug_info    0x00000627       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
- .debug_info    0x00000704       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
+ .debug_info    0x00000000      0x1c0 7segment.o
+ .debug_info    0x000001c0      0x25a gpio.o
+ .debug_info    0x0000041a       0xed Interrupts.o
+ .debug_info    0x00000507      0x16d led.o
+ .debug_info    0x00000674      0x17b sevenSegment.o
+ .debug_info    0x000007ef       0x9d softwareDelay.o
+ .debug_info    0x0000088c      0x595 timer.o
+ .debug_info    0x00000e21       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+ .debug_info    0x00000efe       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
+ .debug_info    0x00000fdb       0xdd c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
  *(.gnu.linkonce.wi.*)
 
-.debug_abbrev   0x00000000      0x267
+.debug_abbrev   0x00000000      0x4c7
  *(.debug_abbrev)
- .debug_abbrev  0x00000000       0x75 7segment.o
- .debug_abbrev  0x00000075       0xc2 gpio.o
- .debug_abbrev  0x00000137       0x8a sevenSegment.o
- .debug_abbrev  0x000001c1       0x6a softwareDelay.o
- .debug_abbrev  0x0000022b       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
- .debug_abbrev  0x0000023f       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
- .debug_abbrev  0x00000253       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
+ .debug_abbrev  0x00000000       0xb5 7segment.o
+ .debug_abbrev  0x000000b5       0xc2 gpio.o
+ .debug_abbrev  0x00000177       0x89 Interrupts.o
+ .debug_abbrev  0x00000200       0x8a led.o
+ .debug_abbrev  0x0000028a       0x8a sevenSegment.o
+ .debug_abbrev  0x00000314       0x6a softwareDelay.o
+ .debug_abbrev  0x0000037e      0x10d timer.o
+ .debug_abbrev  0x0000048b       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+ .debug_abbrev  0x0000049f       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
+ .debug_abbrev  0x000004b3       0x14 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
 
-.debug_line     0x00000000      0x3a7
+.debug_line     0x00000000      0x560
  *(.debug_line)
- .debug_line    0x00000000       0x71 7segment.o
- .debug_line    0x00000071       0xb5 gpio.o
- .debug_line    0x00000126       0x78 sevenSegment.o
- .debug_line    0x0000019e       0x62 softwareDelay.o
- .debug_line    0x00000200       0x88 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
- .debug_line    0x00000288       0x91 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
- .debug_line    0x00000319       0x8e c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
+ .debug_line    0x00000000       0x96 7segment.o
+ .debug_line    0x00000096       0xbb gpio.o
+ .debug_line    0x00000151       0x66 Interrupts.o
+ .debug_line    0x000001b7       0x71 led.o
+ .debug_line    0x00000228       0x78 sevenSegment.o
+ .debug_line    0x000002a0       0x62 softwareDelay.o
+ .debug_line    0x00000302       0xb7 timer.o
+ .debug_line    0x000003b9       0x88 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_exit.o)
+ .debug_line    0x00000441       0x91 c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_copy_data.o)
+ .debug_line    0x000004d2       0x8e c:/program files (x86)/atmel/atmel studio 6.0/extensions/atmel/avrgcc/3.4.1.95/avrtoolchain/bin/../lib/gcc/avr/4.6.2/avr5\libgcc.a(_clear_bss.o)
 
-.debug_frame    0x00000000      0x130
+.debug_frame    0x00000000      0x36c
  *(.debug_frame)
- .debug_frame   0x00000000       0x24 7segment.o
- .debug_frame   0x00000024       0x94 gpio.o
- .debug_frame   0x000000b8       0x54 sevenSegment.o
- .debug_frame   0x0000010c       0x24 softwareDelay.o
+ .debug_frame   0x00000000       0x54 7segment.o
+ .debug_frame   0x00000054       0x94 gpio.o
+ .debug_frame   0x000000e8       0x64 Interrupts.o
+ .debug_frame   0x0000014c       0x54 led.o
+ .debug_frame   0x000001a0       0x54 sevenSegment.o
+ .debug_frame   0x000001f4       0x24 softwareDelay.o
+ .debug_frame   0x00000218      0x154 timer.o
 
-.debug_str      0x00000000      0x2a1
+.debug_str      0x00000000      0x7df
  *(.debug_str)
- .debug_str     0x00000000       0xd1 7segment.o
-                                0x10d (size before relaxing)
- .debug_str     0x000000d1       0xda gpio.o
+ .debug_str     0x00000000      0x229 7segment.o
+                                0x265 (size before relaxing)
+ .debug_str     0x00000229       0xda gpio.o
                                 0x192 (size before relaxing)
- .debug_str     0x000001ab       0xa5 sevenSegment.o
+ .debug_str     0x00000303       0x39 Interrupts.o
+                                0x122 (size before relaxing)
+ .debug_str     0x0000033c       0x91 led.o
+                                0x141 (size before relaxing)
+ .debug_str     0x000003cd       0x73 sevenSegment.o
                                 0x179 (size before relaxing)
- .debug_str     0x00000250       0x51 softwareDelay.o
+ .debug_str     0x00000440       0x48 softwareDelay.o
                                 0x101 (size before relaxing)
+ .debug_str     0x00000488      0x357 timer.o
+                                0x570 (size before relaxing)
 
-.debug_loc      0x00000000      0x4f9
+.debug_loc      0x00000000      0x93d
  *(.debug_loc)
- .debug_loc     0x00000000       0x96 7segment.o
- .debug_loc     0x00000096      0x34d gpio.o
- .debug_loc     0x000003e3       0x96 sevenSegment.o
- .debug_loc     0x00000479       0x80 softwareDelay.o
+ .debug_loc     0x00000000       0xf9 7segment.o
+ .debug_loc     0x000000f9      0x3c0 gpio.o
+ .debug_loc     0x000004b9       0x63 Interrupts.o
+ .debug_loc     0x0000051c       0xd0 led.o
+ .debug_loc     0x000005ec       0x96 sevenSegment.o
+ .debug_loc     0x00000682       0x80 softwareDelay.o
+ .debug_loc     0x00000702      0x23b timer.o
 
 .debug_macinfo
  *(.debug_macinfo)

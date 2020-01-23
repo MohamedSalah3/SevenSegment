@@ -38,6 +38,7 @@ C_SRCS +=  \
 ../7segment.c \
 ../gpio.c \
 ../Interrupts.c \
+../led.c \
 ../sevenSegment.c \
 ../softwareDelay.c \
 ../timer.c
@@ -53,6 +54,7 @@ OBJS +=  \
 7segment.o \
 gpio.o \
 Interrupts.o \
+led.o \
 sevenSegment.o \
 softwareDelay.o \
 timer.o
@@ -62,6 +64,7 @@ OBJS_AS_ARGS +=  \
 7segment.o \
 gpio.o \
 Interrupts.o \
+led.o \
 sevenSegment.o \
 softwareDelay.o \
 timer.o
@@ -71,6 +74,7 @@ C_DEPS +=  \
 7segment.d \
 gpio.d \
 Interrupts.d \
+led.d \
 sevenSegment.d \
 softwareDelay.d \
 timer.d
@@ -80,6 +84,7 @@ C_DEPS_AS_ARGS +=  \
 7segment.d \
 gpio.d \
 Interrupts.d \
+led.d \
 sevenSegment.d \
 softwareDelay.d \
 timer.d
@@ -94,6 +99,8 @@ ADDITIONAL_DEPENDENCIES:=
 OUTPUT_FILE_DEP:= ./makedep.mk
 
 # AVR32/GNU C Compiler
+
+
 
 
 

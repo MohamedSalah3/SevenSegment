@@ -82,6 +82,15 @@
     <Compile Include="Interrupts.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="led.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="led.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="ledConfig.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="registers.h">
       <SubType>compile</SubType>
     </Compile>

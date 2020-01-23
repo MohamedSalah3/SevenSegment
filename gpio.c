@@ -89,7 +89,7 @@ switch (u8_port)
 
 uint8_t gpioPortRead(uint8_t u8_port)
 {
-	uint8_t U8_ret_Port_data;
+	uint8_t U8_ret_Port_data=0;
 	
 switch (u8_port)	
 {	case GPIOA:

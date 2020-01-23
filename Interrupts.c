@@ -18,10 +18,9 @@ void G_interrupt_Disable(void)
 
 CLEAR_BIT(SREG,7);
 }
-/*
+
 void __vector_11(void) __attribute__((signal,__INTR_ATTRS));
 void __vector_11(void)
 {
 u32_ovf_counter++;
 }
-*/

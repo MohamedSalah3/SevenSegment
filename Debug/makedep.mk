@@ -8,6 +8,8 @@ gpio.c
 
 Interrupts.c
 
+led.c
+
 sevenSegment.c
 
 softwareDelay.c
