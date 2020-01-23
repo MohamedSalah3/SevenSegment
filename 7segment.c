@@ -29,36 +29,38 @@ sevenSegInit(SEG_1);
 	sevenSegEnable(SEG_0);
 	sevenSegEnable(SEG_1);
 	//sevenSegWrite(SEG_0,0);
-
-
 for (Loop_counter=0;Loop_counter<10;Loop_counter++)
-{	flag=0;
+{
+	flag=0;
 	sevenSegDisable(SEG_0);
+	sevenSegEnable(SEG_1);
 	sevenSegWrite(SEG_1,counter);
-timer0Start();
-timer0DelayMs(50);
+	timer0Start();
+	timer0DelayMs(50);
+	sevenSegDisable(SEG_1);
+	sevenSegEnable(SEG_0);
+	sevenSegWrite(SEG_0,counter10);
+	/*softwareDelayMs(50);*/
+	timer0Start();
+	timer0DelayMs(50);
+
 /*softwareDelayMs(50);*/
 
-counter++;
 if (counter >= 10)
 {
 	flag=1;
 	counter=0;
 	//break;
+}else{
+	counter++;
 }
 	if(flag == 1)
 	{
-
-		counter10++;
-			flag=0;
-			sevenSegDisable(SEG_1);
-			sevenSegEnable(SEG_0);
-			sevenSegWrite(SEG_0,counter10);
-			/*softwareDelayMs(50);*/
-			timer0Start();
-			timer0DelayMs(50);
-
+	  	counter10++;
 	}
+	timer0Start();
+	timer0DelayMs(500);
+
 }
 
         //TODO:: Please write your application code
