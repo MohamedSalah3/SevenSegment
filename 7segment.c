@@ -48,8 +48,6 @@ if (counter >= 9 || counter10 >=9)
 	{
 	  	counter10++;
 	}
-timer0Start();
-timer0DelayMs(500);
 for (Loop_counter=0;Loop_counter<10;Loop_counter++)
 {
 sevenSegDisable(SEG_0);
@@ -61,12 +59,16 @@ sevenSegDisable(SEG_1);
 sevenSegEnable(SEG_0);
 sevenSegWrite(SEG_0,*ptru8_counter10);
 /*softwareDelayMs(50);*/
+timer0Start();
+timer0DelayMs(10);
+sevenSegDisable(SEG_0);
 }
+}
+
 timer0Start();
 timer0DelayMs(500);//TODO:: Please write your application code
-}
-//TODO:: Please write your application code
-    }
+
+   }
 }
 void __vector_11(void) __attribute__((signal,__INTR_ATTRS));
 void __vector_11(void)
