@@ -5,7 +5,11 @@
  *  Author: mo
  */
 
-
+#include "Interrupts.h"
+#include "timers.h"
+#include "registers.h"
+#include "std_types.h"
+#include "gpio.h"
 #include "sevenSeg.h"
 #include "sevenSegConfig.h"
 
